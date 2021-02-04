@@ -6,7 +6,7 @@ Please fill out all of the following sections to help us grade your submission:
 
 ## Student (to be completed individually)
 
-* Zixuan Zhang, zhan@umn.edu
+* Zixuan Zhang, zhan7230@umn.edu
 
 ## Link to Site
 
