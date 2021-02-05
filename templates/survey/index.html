@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Index{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+{% block content %}
+<h1>Survey descriptions</h1>
+<a href="/survey"><button>Consent</button></a>
+<a href="/decline"><button>Decline</button></a>
+{% endblock %}
