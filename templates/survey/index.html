@@ -3,10 +3,14 @@
 {% block title %}Index{% endblock %}
 {% block head %}
     {{ super() }}
+    <link rel="stylesheet" href="static/css/survey/index.css"/>
 {% endblock %}
 
 {% block content %}
-<h1>Survey descriptions</h1>
-<a href="/survey"><button>Consent</button></a>
-<a href="/decline"><button>Decline</button></a>
+<div class="container center">
+    <h1>Welcome to this survey!</h1>
+    <p>This is survery about ... Are you in?</p>
+    <a href="/survey"><button class="button-consent pure-button">Oh Yes!</button></a>
+    <a href="/decline"><button class="button-decline pure-button">Umm.. No</button></a>
+</div>
 {% endblock %}

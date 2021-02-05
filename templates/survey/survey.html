@@ -6,5 +6,40 @@
 {% endblock %}
 
 {% block content %}
+<form method="post" action="/survey" class="pure-form pure-form-aligned">
+    <div class="pure-control-group">
+        <label for="name">Username</label>
+        <input type="text" name="name" pattern="[A-Za-z]{3,}" required>
+    </div>
 
+    <div class="pure-control-group">
+        <label for="name">Username</label>
+        <input type="radio" name="radio">
+        <input type="radio" name="radio">
+        <input type="radio" name="radio">
+    </div>
+
+    <div class="pure-control-group">
+        <label for="name">Username</label>
+        <select name="">
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+        </select>
+    </div>
+
+    <div class="pure-control-group">
+        <label for="name">Username</label>
+        <input type="checkbox" name="">
+    </div>
+
+    <div class="pure-control-group">
+        <label for="name">Additional info:</label>
+        <input type="textarea" name="" disabled>
+    </div>
+
+    <div class="pure-controls">
+        <button type="submit" class="pure-button button-consent">Next</button>
+    </div>
+</form>
 {% endblock %}

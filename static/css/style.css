@@ -1,0 +1,40 @@
+body {
+    background-color: #41bfad;
+    color: white;
+}
+
+.center {
+    text-align: center;
+}
+
+.container {
+    margin: auto;
+    width: 90%;
+    padding-top: 200px;
+}
+
+.container h1 {
+    font-size: 55px;
+}
+
+.container p {
+    font-size: 25px;
+}
+
+.button-consent {
+    background: #cafafe;
+}
+
+.button-decline {
+    background: #d3d3d3;
+}
+
+.footer {
+    background: #97caef;
+    position: fixed;
+    bottom: 0;
+    margin: auto;
+    width: 100%;
+    padding: 15px;
+    /* border-radius: 15px; */
+}

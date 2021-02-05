@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import render_template
 from flask import request
+from flask import redirect, url_for
 
 app = Flask(__name__)
 
@@ -8,22 +9,24 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     '''renders the root page describing the survey and asking for consent'''
-    return render_template('index.html')
+    return render_template('survey/index.html')
 
 
-@app.route('/survey')
+@app.route('/survey', methods=['GET', 'POST'])
 def survey():
-    return render_template('survey.html')
-
+    if request.method == 'GET':
+        return render_template('survey/survey.html')
+    else: # request.method == 'POST':
+        return redirect(url_for('thanks'))
 
 @app.route('/decline')
 def decline():
-    return render_template('decline.html')
+    return render_template('survey/decline.html')
 
 
 @app.route('/thanks')
 def thanks():
-    return render_template('thanks.html')
+    return render_template('survey/thanks.html')
 
 
 @app.route('/api/results')
@@ -38,4 +41,4 @@ def results():
 
 @app.route('/admin/summary')
 def summary():
-    return render_template('admin.html')
+    return render_template('admin/summary.html')
