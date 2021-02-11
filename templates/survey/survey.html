@@ -3,6 +3,7 @@
 {% block title %}{% endblock %}
 {% block head %}
     {{ super() }}
+    <script src="static/javascript/survey/survey.js"></script>
 {% endblock %}
 
 {% block content %}
@@ -12,39 +13,39 @@
     <form method="post" action="/survey" class="pure-form pure-form-aligned">
         <div class="pure-control-group">
             <label for="nickname">Nickname</label>
-            <input type="text" name="nickname" pattern="[A-Za-z]{3,}" required>
+            <input id="nickname" type="text" name="nickname" pattern="[A-Za-z]{3,}" required>
         </div>
         
         <br/> 
 
         <div class="pure-control-group">
-            <label for="name">Best day in a week?</label>
-            <select name="">
-                <option value="">Monday</option>
-                <option value="">Tuesday</option>
-                <option value="">Wednesday</option>
-                <option value="">Thursday</option>
-                <option value="">Friday</option>
-                <option value="">Saturday</option>
-                <option value="">Sunday</option>
+            <label for="best_day">Best day in a week?</label>
+            <select id="best_day" name="best_day">
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+                <option value="Saturday">Saturday</option>
+                <option value="Sunday">Sunday</option>
             </select>
         </div>
         
         <br/> 
         
         <div class="pure-control-group">
-            <label for="name">Best time in a day?</label>
-            <input type="radio" name="radio" value="Morning" required> Morning</input>
-            <input type="radio" name="radio" value="Afternoon" required> Afternoon</input>
-            <input type="radio" name="radio" value="Evening" required> Evening</input>
-            <input type="radio" name="radio" value="Night" required> Night</input>
+            <label for="best_time">Best time in a day?</label>
+            <input id="best_time" type="radio" name="best_time" value="Morning" required> Morning</input>
+            <input id="best_time" type="radio" name="best_time" value="Afternoon" required> Afternoon</input>
+            <input id="best_time" type="radio" name="best_time" value="Evening" required> Evening</input>
+            <input id="best_time" type="radio" name="best_time" value="Night" required> Night</input>
         </div>
         <div class="pure-controls">
-            <label for="name" class="pure-checkbox">
-                <input type="checkbox" name=""> Got more to say?
+            <label for="got-more" class="pure-checkbox">
+                <input id="got-more" type="checkbox" name=""> Got more to say?
             </label>
-            <label for="name"></label>
-            <textarea class="pure-input-1-2" name="" placeholder="Addtional info" disabled></textarea>
+            <label for="info"></label>
+            <textarea id="info" class="pure-input-1-2" name="info" placeholder="Addtional info" disabled></textarea>
         </div>
     
         <div class="pure-controls">
