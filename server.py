@@ -3,23 +3,30 @@ from flask import render_template
 from flask import request
 from flask import redirect, url_for, jsonify
 
+from datetime import datetime
+
 import db
 
 app = Flask(__name__)
 
 # have the DB submodule set itself up before we get started.
+
+
 @app.before_first_request
 def initialize():
     db.setup()
+
 
 @app.route('/')
 def index():
     '''renders the root page describing the survey and asking for consent'''
     return render_template('survey/index.html')
 
+
 @app.route('/survey', methods=['GET'])
 def survey():
     return render_template('survey/survey.html')
+
 
 @app.route('/survey', methods=['POST'])
 def new_survey():
@@ -35,28 +42,39 @@ def new_survey():
             return redirect(url_for('survey'))
 
         # log response
-        app.logger.info(f"Adding a new response: (nickname: {nickname}, best_day: {best_day}, best_time: {best_time}, info: {info})")
+        app.logger.info(
+            f"Adding a new response: (nickname: {nickname}, best_day: {best_day}, best_time: {best_time}, info: {info}, timestamp: {datetime.now()})")
 
-        # insert response into database
-        cursor.execute("INSERT INTO survey(nickname, best_day, best_time, info) values(%s, %s, %s, %s)", (nickname, best_day, best_time, info))
+        # insert response into database (the timestamp will be converted to GMT time --- 0 offset from UTC)
+        cursor.execute("INSERT INTO survey(nickname, best_day, best_time, info, tz) values(%s, %s, %s, %s, %s)",
+                       (nickname, best_day, best_time, info, datetime.now()))
 
         return redirect(url_for('thanks'))
+
 
 @app.route('/decline')
 def decline():
     return render_template('survey/decline.html')
 
+
 @app.route('/thanks')
 def thanks():
     return render_template('survey/thanks.html')
+
 
 @app.route('/api/results')
 def results():
     with db.get_db_cursor() as cursor:
         reverse = request.args.get('reverse')
-        cursor.execute("SELECT * FROM survey")
-        results = [{'id': record[0], 'nickname': record[1], 'best_day': record[2], 'best_time': record[3]} for record in cursor]
+        cursor.execute("SELECT id, nickname, best_day, best_time, info, tz from survey")
+        results = [{'id': record[0],
+                    'nickname': record[1],
+                    'best_day': record[2],
+                    'best_time': record[3],
+                    'info': record[4],
+                    'timestamp': record[5]} for record in cursor]
         return jsonify(results)
+
 
 @app.route('/admin/summary')
 def summary():

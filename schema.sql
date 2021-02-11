@@ -5,5 +5,6 @@ CREATE TABLE survey (
     nickname VARCHAR(50) NOT NULL,
     best_day VARCHAR(9) NOT NULL,
     best_time VARCHAR(9) NOT NULL,
-    info TEXT
+    info TEXT,
+    tz TIMESTAMP NOT NULL
 );
