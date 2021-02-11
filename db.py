@@ -5,7 +5,7 @@ docs:
 * http://initd.org/psycopg/docs/extras.html#dictionary-like-cursor
 """
 
-from contextliv import contextmanager
+from contextlib import contextmanager
 import logging
 import os
 
@@ -21,7 +21,7 @@ def setup():
     global pool
     DATABASE_URL = os.environ['DATABASE_URL']
     current_app.logger.info(f"creating db connection pool")
-    pool = ThreadedConnectionPool(1, 4, dsn=DATABASE_URL, sslmode=true)
+    pool = ThreadedConnectionPool(1, 4, dsn=DATABASE_URL, sslmode='require')
 
 @contextmanager
 def get_db_connection():

@@ -3,8 +3,14 @@ from flask import render_template
 from flask import request
 from flask import redirect, url_for
 
+import db
+
 app = Flask(__name__)
 
+# have the DB submodule set itself up before we get started.
+@app.before_first_request
+def initialize():
+    db.setup()
 
 @app.route('/')
 def index():
@@ -12,11 +18,30 @@ def index():
     return render_template('survey/index.html')
 
 
-@app.route('/survey', methods=['GET', 'POST'])
+@app.route('/survey', methods=['GET'])
 def survey():
-    if request.method == 'GET':
-        return render_template('survey/survey.html')
-    else: # request.method == 'POST':
+    return render_template('survey/survey.html')
+
+
+@app.route('/survey', methods=['POST'])
+def new_survey():
+    with db.get_db_cursor(True) as cursor:
+        nickname = request.form.get('nickname')
+        best_day = request.form.get('best_day')
+        best_time = request.form.get('best_time')
+        info = request.form.get('info')
+
+        # backend form validation
+        fields = [nickname, best_day, best_time]
+        if None in fields or '' in fields:
+            return redirect(url_for('survey'))
+
+        # log response
+        app.logger.info(f"Adding a new response: (nickname: {nickname}, best_day: {best_day}, best_time: {best_time}, info: {info})")
+
+        # insert response into database
+        cursor.execute("INSERT INTO survey(nickname, best_day, best_time, info) values(%s, %s, %s, %s)", (nickname, best_day, best_time, info))
+
         return redirect(url_for('thanks'))
 
 @app.route('/decline')
