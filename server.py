@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import render_template
 from flask import request
-from flask import redirect, url_for
+from flask import redirect, url_for, jsonify
 
 import db
 
@@ -17,11 +17,9 @@ def index():
     '''renders the root page describing the survey and asking for consent'''
     return render_template('survey/index.html')
 
-
 @app.route('/survey', methods=['GET'])
 def survey():
     return render_template('survey/survey.html')
-
 
 @app.route('/survey', methods=['POST'])
 def new_survey():
@@ -48,21 +46,17 @@ def new_survey():
 def decline():
     return render_template('survey/decline.html')
 
-
 @app.route('/thanks')
 def thanks():
     return render_template('survey/thanks.html')
 
-
 @app.route('/api/results')
 def results():
-    reverse = request.args.get('reverse')
-    if reverse:
-        pass
-    else:
-        pass
-    return {}
-
+    with db.get_db_cursor() as cursor:
+        reverse = request.args.get('reverse')
+        cursor.execute("SELECT * FROM survey")
+        results = [{'id': record[0], 'nickname': record[1], 'best_day': record[2], 'best_time': record[3]} for record in cursor]
+        return jsonify(results)
 
 @app.route('/admin/summary')
 def summary():
