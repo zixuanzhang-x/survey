@@ -1,7 +1,11 @@
 document.addEventListener('DOMContentLoaded', function () {
-    console.log("yes!")
+    document.getElementById('info').style.display = 'none';
     document.getElementById('got-more').addEventListener('change', function () {
-        let disabled = document.getElementById('info').disabled;
-        document.getElementById('info').disabled = !disabled;
+        let textarea = document.getElementById('info');
+        if (textarea.style.display === 'none') {
+            textarea.style.display = "block";
+        } else {
+            textarea.style.display = "none";
+        }
     })
 });
