@@ -4,8 +4,32 @@
 
 {% block head %}
     {{ super() }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+    <script src="../static/javascript/admin/summary.js"></script>
+    <link rel="stylesheet" href="../static/css/admin/summary.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 {% endblock %}
 
 {% block content %}
+    <div class="container">
+        <h1 class="center">Students' prefered days to study</h1>
+        <canvas id="bestDayBarChart"></canvas>
+    </div>
 
+    <div class="container">
+        <h1 class="center">Students' prefered time to study</h1>
+        <canvas id="bestTimeBarChart"></canvas>
+    </div>
+    
+    <div class="container">
+        <h1 class="center">How many students provided additional info</h1>
+        <canvas id="sayMoreBarChart"></canvas>
+    </div>
+
+    <div class="container">
+        <h1 class="center">Number of responses per day</h1>
+        <canvas id="timeSeriesChart"></canvas>
+    </div>
+   
 {% endblock %}
