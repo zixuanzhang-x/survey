@@ -75,9 +75,8 @@ def results():
                     'info': record[4],
                     'timestamp': record[5]} for record in cursor]
         if reverse == 'true':
-            results.reverse()
+            results.sort(key=lambda obj: datetime.strptime(str(obj['timestamp']), '%Y-%m-%d %H:%M:%S.%f'), reverse=True)
         return jsonify(results)
-
 
 @app.route('/admin/summary')
 def summary():
