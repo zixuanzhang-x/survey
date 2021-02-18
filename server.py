@@ -64,6 +64,7 @@ def thanks():
 
 @app.route('/api/results')
 def results():
+    reverse = request.args.get('reverse', '')
     with db.get_db_cursor() as cursor:
         reverse = request.args.get('reverse')
         cursor.execute("SELECT id, nickname, best_day, best_time, info, tz from survey")
@@ -73,6 +74,8 @@ def results():
                     'best_time': record[3],
                     'info': record[4],
                     'timestamp': record[5]} for record in cursor]
+        if reverse == 'true':
+            results.reverse()
         return jsonify(results)
 
 
