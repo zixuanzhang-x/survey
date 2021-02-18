@@ -6,15 +6,15 @@ Please fill out all of the following sections to help us grade your submission:
 
 ## Student (to be completed individually)
 
-* Zixuan Zhang, zhan7230@umn.edu
+* Zixuan Zhang, zixuanzhang.x@gmail.com
 
 ## Link to Site
 
-<https://TODO.herokuapp.com/>
+<https://lemon-survey.herokuapp.com/>
 
 ## Challenge Task
 
-* I started the challenge task: [yes/no]
-* I completed the challenge task: [yes/no]
+* I started the challenge task: [yes]
+* I completed the challenge task: [yes]
 
-(if applicable) link: <https://TODO.herokuapp.com/admin/summary>
+(if applicable) link: <https://lemon-survey.herokuapp.com/admin/summary>
