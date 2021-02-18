@@ -5,8 +5,6 @@ document.addEventListener('DOMContentLoaded', function () {
             reverse: true,
         },
         success: function (result) {
-            console.log(result);
-            console.log(extractTimeData(result));
             extractTimeseriesData(result);
             setupCharts(
                 extractDayData(result),
@@ -14,6 +12,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 extractInfoData(result),
                 extractTimeseriesData(result)
             );
+            let commentList = document.querySelector('#commentList');
+            result.forEach((item) => {
+                if (item['info'] !== null) {
+                    var node = document.createElement('LI'); 
+                    var textnode = document.createTextNode(`${item['nickname']} says: ${item['info']}`);
+                    node.appendChild(textnode); // Append the text to <li>
+                    commentList.appendChild(node);
+                }
+            });
         },
     });
 });
@@ -79,22 +86,22 @@ let extractTimeseriesData = (result) => {
         } else {
             map[date] = 1;
         }
-    })
-    console.log(map);
-    
-    let date = moment(Date.parse(result[result.length - 1]['timestamp'])).startOf('day');
+    });
+
+    let date = moment(
+        Date.parse(result[result.length - 1]['timestamp'])
+    ).startOf('day');
     let timeSeriesData = [];
     while (date.isBefore(moment())) {
         if (map.hasOwnProperty(date)) {
-            timeSeriesData.push({t: date, y: map[date]})
+            timeSeriesData.push({ t: date, y: map[date] });
         } else {
-            timeSeriesData.push({t: date, y: 0})
+            timeSeriesData.push({ t: date, y: 0 });
         }
         date = date.clone().add(1, 'day').startOf('day');
     }
-    console.log(timeSeriesData);
     return timeSeriesData;
-}
+};
 
 let setupCharts = (dayData, timeData, infoData, timeseriesData) => {
     var bestDayCanvas = document
@@ -203,7 +210,7 @@ let setupCharts = (dayData, timeData, infoData, timeseriesData) => {
         pointRadius: 0,
         fill: false,
         lineTension: 0,
-        borderWidth: 2
+        borderWidth: 2,
     };
     var timeSeriesChart = new Chart(timeSeriesCanvas, {
         type: 'line',

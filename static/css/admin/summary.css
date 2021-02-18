@@ -4,7 +4,20 @@
     padding-top: 20px;
 }
 
-
 .center {
     text-align: center;
+}
+
+ul {
+    background: #caaaff;
+    padding: 10px;
+    font-size: 24px;
+}
+
+ul li {
+    background: white;
+    margin: 5px;
+    letter-spacing: 1px;
+    padding: 10px;
+    list-style-type: none;
 }
