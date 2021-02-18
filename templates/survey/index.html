@@ -1,7 +1,13 @@
-{% extends "base.html" %} {% block title %}Index{% endblock %} {% block head %}
+{% extends "base.html" %}
+
+{% block title %}Welcome{% endblock %}
+
+{% block head %}
 {{ super() }}
 <link rel="stylesheet" href="static/css/survey/index.css" />
-{% endblock %} {% block content %}
+{% endblock %}
+
+{% block content %}
 <div class="container center">
     <h1>Welcome to this survey!</h1>
     <p>This is survery about students' study schedules!</p>
