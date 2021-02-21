@@ -131,6 +131,17 @@ let setupCharts = (dayData, timeData, infoData, timeseriesData) => {
                 },
             ],
         },
+        options: {
+            scales: {
+                yAxes: [
+                    {
+                        ticks: {
+                            beginAtZero: true,
+                        },
+                    },
+                ],
+            },
+        },
     });
 
     var bestTimeCanvas = document
